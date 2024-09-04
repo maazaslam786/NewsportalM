@@ -85,7 +85,7 @@ if ($result->num_rows > 0) {
 
     <!-- Page Content -->
     <div class="container">
-    <div class="row" style="margin-top: 4%">
+    <div class="row" style="margin-top: 10%">
         <!-- Blog Entries Column -->
         <div class="col-md-8">
             <!-- Blog Post -->

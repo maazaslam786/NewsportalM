@@ -1,126 +1,30 @@
-<!-- <script>
+<script>
 let slideIndex = 0;
-
-function showSlides(n) {
-    let slides = document.querySelectorAll(".slider-container .slide-group");
-    
-    // Ensure slideIndex stays within bounds
-    if (n >= slides.length) {
-        slideIndex = 0;
-    } else if (n < 0) {
-        slideIndex = slides.length - 1;
-    }
-
-    // Set transform property for each slide
-    slides.forEach((slide, i) => {
-        slide.style.transform = `translateX(-${slideIndex * 100}%)`;
-    });
-}
-
-function plusSlides(n) {
-    slideIndex += n;
-    showSlides(slideIndex);
-}
-
-document.querySelector('.next').addEventListener('click', () => plusSlides(1));
-document.querySelector('.prev').addEventListener('click', () => plusSlides(-1));
-
-// Initialize the first slide
-showSlides(slideIndex);
-
-</script> -->
-
-<!-- <script>let slideIndex = 0;
-const slideInterval = 3000; // Time in milliseconds (3 seconds)
-
-function showSlides(n) {
-    let slides = document.querySelectorAll(".slider-container .slide-group");
-    
-    // Ensure slideIndex stays within bounds
-    if (n >= slides.length) {
-        slideIndex = 0;
-    } else if (n < 0) {
-        slideIndex = slides.length - 1;
-    }
-
-    // Set transform property for each slide
-    slides.forEach((slide, i) => {
-        slide.style.transform = `translateX(-${slideIndex * 100}%)`;
-    });
-}
-
-function plusSlides(n) {
-    slideIndex += n;
-    showSlides(slideIndex);
-}
-
-// Initialize the first slide
-showSlides(slideIndex);
-
-// Automatically slide every few seconds
-setInterval(() => {
-    plusSlides(1);
-}, slideInterval);
-</script> -->
-<!-- <script>
-let slideIndex = 0;
-const slideInterval = 3000; // Time in milliseconds (3 seconds)
+const slideInterval = 50; // Lower value for faster scrolling
 
 function showSlides() {
-    let slides = document.querySelectorAll(".slider-container .slide-group");
-    const totalSlides = slides.length;
+    const slides = document.querySelector(".slider-container .slide-group");
+    const totalSlides = document.querySelectorAll(".slide-item").length;
 
-    // Ensure slideIndex stays within bounds
-    slideIndex = (slideIndex + 1) % totalSlides;
+    // Calculate the width of a single slide item
+    const slideWidth = document.querySelector(".slide-item").offsetWidth;
+    
+    // Increment the slide index to create the sliding effect
+    slideIndex++;
 
-    // Set transform property to move slides horizontally
-    document.querySelector('.slider-container').style.transform = `translateX(-${slideIndex * 100}%)`;
+    // Reset slideIndex to zero when it exceeds the total scrollable width
+    if (slideIndex >= totalSlides * slideWidth) {
+        slideIndex = 0;
+    }
+
+    // Apply the transform to create the sliding effect
+    slides.style.transform = `translateX(-${slideIndex}px)`;
 }
 
 function startAutoSlide() {
     setInterval(showSlides, slideInterval);
 }
 
-// Initialize the first slide and start automatic sliding
+// Start automatic sliding
 startAutoSlide();
-</script> -->
-<script>
-let slideIndex = 0;
-const slideInterval = 5000; // Time in milliseconds (5 seconds)
-
-function showSlides() {
-    let slides = document.querySelectorAll(".slider-container .slide-group");
-    const totalSlides = slides.length;
-
-    // Ensure slideIndex stays within bounds
-    slideIndex = (slideIndex + 1) % totalSlides;
-
-    // Set transform property to move slides horizontally
-    document.querySelector('.slider-container').style.transform = `translateX(-${slideIndex * 100}%)`;
-}
-
-function startAutoSlide() {
-    setInterval(showSlides, slideInterval);
-}
-
-// Initialize the first slide and start automatic sliding
-startAutoSlide();
-
-
-</script>
-
-
-<script>
-    document.querySelectorAll('.article-content1').forEach(item => {
-    item.addEventListener('mouseenter', function() {
-        this.style.transform = 'scale(1.05)';
-        this.style.boxShadow = '0 15px 25px rgba(0, 0, 0, 0.3)';
-    });
-
-    item.addEventListener('mouseleave', function() {
-        this.style.transform = 'scale(1)';
-        this.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.1)';
-    });
-});
-
 </script>

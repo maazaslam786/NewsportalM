@@ -16,15 +16,16 @@ include('includes/config.php'); // Include the configuration file that contains 
 <body>
     <?php include('headermain.php')?>
 
+    
    
         <!-- Section for displaying extra content like the most popular articles -->
-        <section class="extra-content">
-            <div class="most-popular">
-                <div class="most-popular-head">
-                    <div class="most-p-icon"><i class="fa-regular fa-star"></i></div> <!-- Icon for most popular section -->
-                    <div class="m-p-text"><h3>Most Popular</h3></div> <!-- Heading for most popular articles -->
+        <section class="mextra-content">
+            <div class="mmost-popular">
+                <div class="mmost-popular-head">
+                    <div class="mmost-p-icon"><i class="fa-regular fa-star"></i></div> <!-- Icon for most popular section -->
+                    <div class="mm-p-text"><h3>Most Popular</h3></div> <!-- Heading for most popular articles -->
                 </div>
-                <div class="popular-articles">
+                <div class="mpopular-articles">
                 <?php
                 // Database connection
             $conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
@@ -65,9 +66,9 @@ include('includes/config.php'); // Include the configuration file that contains 
         </section>
 
         <!-- Section for displaying featured content -->
-        <section class="content">
-            <div class="featured-article">
-                <div class="article-content">
+        <section class="mcontent">
+            <div class="mfeatured-article">
+                <div class="marticle-content">
                     <?php
                     // Reconnect to the database
                 $conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
@@ -125,7 +126,7 @@ include('includes/config.php'); // Include the configuration file that contains 
             </div>
 
             <!-- Section for displaying side articles -->
-            <div class="side-articles">
+            <div class="mside-articles">
                 <?php
                 // Reconnect to the database
             $conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
@@ -143,9 +144,9 @@ include('includes/config.php'); // Include the configuration file that contains 
                 if ($result->num_rows > 0) {
                     while($row = $result->fetch_assoc()) {
                         // Display each side article with a link to its details
-                        echo '<div class="side-article">';
+                        echo '<div class="mside-article">';
                         echo '<a href="news-details.php?nid=' . htmlspecialchars($row['id'], ENT_QUOTES, 'UTF-8') . '">';
-                        echo '<h3 class="heading">' . $row['PostTitle'] . '</h3>';
+                        echo '<h3 class="mheading">' . $row['PostTitle'] . '</h3>';
                         echo '<img src="admin/postimages/' . $row['PostImage'] . '" alt="" height="60%" width="100%">';
                         echo '</a>';
                         echo '</div>';
@@ -160,7 +161,7 @@ include('includes/config.php'); // Include the configuration file that contains 
             </div>
                                       
             <!-- Section for displaying recent news -->
-            <aside class="recent-news">
+            <aside class="mrecent-news">
                 <h3>Recent News</h3>
                 <ul>
                 <?php
@@ -203,7 +204,7 @@ include('includes/config.php'); // Include the configuration file that contains 
 
         <section class="mycontent">  
         <div class="mycontainer">
-            <div class="featured-article1">
+            <div class="mfeatured-article1">
                 <?php
                 // Reconnect to the database
                 $conn = mysqli_connect(DB_SERVER,DB_USER,DB_PASS,DB_NAME);
@@ -214,7 +215,7 @@ include('includes/config.php'); // Include the configuration file that contains 
                 }
                 
                 // Define the SQL query to fetch the featured articles
-                $sql = "SELECT id, PostTitle, PostDetails, PostingDate, PostImage,viewCounter FROM tblposts WHERE Is_Active=1  ORDER BY PostingDate DESC";
+                $sql = "SELECT id, PostTitle, PostDetails, PostingDate, PostImage,viewCounter FROM tblposts WHERE Is_Active=1  ";
                 $result = $conn->query($sql);
           
                 if ($result->num_rows > 0) {
@@ -232,10 +233,10 @@ include('includes/config.php'); // Include the configuration file that contains 
                             if ($count > 0) {
                                 echo '</div>'; // Close previous featured-article1 div
                             }
-                            echo '<div class="featured-article1">';
+                            echo '<div class="mfeatured-article1">';
                         }
                     
-                        echo '<div class="article-content1">';
+                        echo '<div class="marticle-content1">';
                         echo '<a href="news-details.php?nid=' . htmlspecialchars($row['id'], ENT_QUOTES, 'UTF-8') . '">';
                         echo '<h2>' . htmlspecialchars($row['PostTitle'], ENT_QUOTES, 'UTF-8') . '</h2>';
                         echo '<img src="admin/postimages/' . htmlspecialchars($row['PostImage'], ENT_QUOTES, 'UTF-8') . '" alt="" height="60%" width="100%">';
@@ -265,7 +266,7 @@ include('includes/config.php'); // Include the configuration file that contains 
         </div>
         </section>    
 
-        <section class="slider">
+<section class="slider">
     <?php
 $conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
 
@@ -303,41 +304,56 @@ $conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
     }
     $conn->close();
     ?>
-        <div>
+
+<div>
     <h2>REVIEWS FROM OUR VALUED USERS</h2>
 </div>
 <hr>
 <div class="slider-container">
-    <?php for ($i = 0; $i < count($posts); $i += 3): ?>
-        <div class="slide-group">
-            <?php for ($j = $i; $j < $i + 3 && $j < count($posts); $j++): ?>
+    <div class="slide-group">
+        <?php foreach ($posts as $post): ?>
+            <?php if (!empty($post['comments'])): ?>
                 <div class="slide-item">
-                    <div class="description">
-                        <h3><?php echo htmlspecialchars($posts[$j]['PostTitle']); ?></h3>
-                        <?php if (!empty($posts[$j]['comments'])): ?>
-                            <div class="comments">
-                                <h4>Comments:</h4>
-                                <ul>
-                                    <?php foreach ($posts[$j]['comments'] as $comment): ?>
-                                        <li><?php echo htmlspecialchars($comment); ?></li>
-                                    <?php endforeach; ?>
-                                </ul>
-                            </div>
-                        <?php endif; ?>
+                    <h3><?php echo htmlspecialchars($post['PostTitle']); ?></h3>
+                    <div class="comments">
+                        <h4>Comments:</h4>
+                        <ul>
+                            <?php foreach ($post['comments'] as $comment): ?>
+                                <li><?php echo htmlspecialchars($comment); ?></li>
+                            <?php endforeach; ?>
+                        </ul>
                     </div>
                 </div>
-            <?php endfor; ?>
-        </div>
-    <?php endfor; ?>
+            <?php endif; ?>
+        <?php endforeach; ?>
+        <!-- Duplicate slide items for seamless loop -->
+        <?php foreach ($posts as $post): ?>
+            <?php if (!empty($post['comments'])): ?>
+                <div class="slide-item">
+                    <h3><?php echo htmlspecialchars($post['PostTitle']); ?></h3>
+                    <div class="comments">
+                        <h4>Comments:</h4>
+                        <ul>
+                            <?php foreach ($post['comments'] as $comment): ?>
+                                <li><?php echo htmlspecialchars($comment); ?></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                </div>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    </div>
 </div>
 
-</section>
-
-
-
 
 
 </section>
+
+
+
+
+
+
             
     </main>
     <div id="surveyModal" class="modal">

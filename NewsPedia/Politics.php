@@ -6,30 +6,13 @@
     <title>News Portal</title>
     <!-- <link rel="stylesheet" href="styles.css"> -->
     <link rel="stylesheet" href="posts_style.css">
+    <link rel="stylesheet" href="homea.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
+<?php include("headermain.php")?>
 <body>
-    <header>
-        <div class="head_padding">
-            <div class="nav-box nav-box1">
-                <h1>News Portal</h1>
-            </div>
-            <div class="nav-box nav-box2">
-                <nav>
-                    <ul>
-                    <li><a href="Home.php">Home</a></li>
-                        <li><a href="politics.php">Politics</a></li>
-                        <li><a href="entertainment.php">Entertainment</a></li>
-                        <li><a href="Style.php">Style</a></li>
-                        <li><a href="Sports.php">Sport</a></li>
-                        <li><a href="Health.php">Health</a></li>
-                        <li><a href="Food.php">Food</a></li>
-                        <li><button class="nav-button" id="loginButton">LOGIN</button></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </header>
+  
+
 
     <main>
         <?php
@@ -57,10 +40,10 @@
         <div class="article-content">
             <?php
             // Include the database connection script
-            define('DB_SERVER', '127.0.0.1');
-            define('DB_USER', 'root');
-            define('DB_PASS', 'LAIBA0244m_');
-            define('DB_NAME', 'newsportal');
+            define('DB_SERVER','localhost');
+            define('DB_USER','root');
+            define('DB_PASS' ,'');
+            define('DB_NAME','newsfinal2');
             $conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
 
             if ($conn->connect_error) {
